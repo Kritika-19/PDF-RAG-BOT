@@ -101,3 +101,5 @@ Response:
   "Summarize section 2"
   "Who is the author?"
 -Model retrieves relevant chunks and answers using RAG.
+
+Kritika
