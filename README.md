@@ -72,15 +72,16 @@ Running the Frontend (Gradio)
 python gradio_app.py
 Gradio will open at: http://127.0.0.1:7860
 ```
-### RAG Workflow Overview
-PDFs are uploaded through FastAPI or Gradio.
-Text is extracted using pypdf.
-Text is chunked into manageable segments.
-Embeddings are created using MiniLM-L6-v2.
-Embeddings are stored in a FAISS index.
-User query is embedded and matched with top-k similar chunks.
-Retrieved context is passed to Flan-T5-Small for answer generation.
-'''
+## RAG Workflow Overview
+
+1. PDFs are uploaded through FastAPI or Gradio.  
+2. Text is extracted using pypdf.  
+3. Text is chunked into manageable segments.  
+4. Embeddings are created using MiniLM-L6-v2.  
+5. Embeddings are stored in a FAISS index.  
+6. User query is embedded and matched with top-k similar chunks.  
+7. Retrieved context is passed to Flan-T5-Small for answer generation.  
+
 ### API Endpoints
 GET /health
 Health check for the backend.
@@ -94,4 +95,4 @@ POST /chat
 Accepts a query string and returns an answer along with retrieved sources.
 
 
-Kritika
+
