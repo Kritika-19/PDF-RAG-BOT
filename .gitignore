@@ -1,0 +1,7 @@
+pvenv/
+__pycache__/
+uploads/*
+models/*
+*.log
+*.cache
+.DS_Store
