@@ -1,105 +1,94 @@
-PDF RAG Bot — FastAPI + FAISS + HuggingFace + Gradio UI
+# PDF RAG Bot (FastAPI + FAISS + HuggingFace + Gradio)
 
-A Retrieval-Augmented Generation (RAG) chatbot that allows users to upload PDFs, embeds them into a vector database using FAISS, and answers questions using a local HuggingFace LLM.
-Includes both a FastAPI backend and an interactive Gradio UI.
+This project implements a Retrieval-Augmented Generation (RAG) chatbot that allows users to upload PDF documents, converts them into embeddings, performs similarity search using FAISS, and generates answers using a local HuggingFace model.  
+The system includes a FastAPI backend and an optional Gradio-based user interface.
 
-Features
--Upload one or multiple PDF files
--Extract and chunk text from PDFs
--Generate dense embeddings using Sentence Transformers
--Store and retrieve PDF chunks using FAISS vector search
--Local LLM generation using HuggingFace FLAN-T5 (no API key needed)
--FastAPI backend with fully documented API endpoints
--Gradio UI for uploading PDFs & chatting with your bot
--Clean, modular architecture suitable for production expansion
+---
 
-Tech Stack
--Backend API: FastAPI
--Vector Store:	FAISS
--Embeddings:	SentenceTransformers (MiniLM-L6-v2)
--LLM: HuggingFace – Flan-T5-Small
--PDF Processing:	pypdf
--Frontend UI:	Gradio
--Environment:	Python 3.10+
+## Features
 
-Project Structure
+- Upload one or multiple PDF documents
+- Extract and chunk text for efficient retrieval
+- Generate embeddings using SentenceTransformers
+- Store and query embeddings using FAISS
+- Local LLM-based answer generation (Flan-T5-Small)
+- FastAPI backend with structured endpoints
+- Gradio UI for PDF upload and chat interaction
+- Modular code structure for clarity and extensibility
+
+## Technology Stack
+
+- FastAPI (Backend API)
+- FAISS (Vector store and similarity search)
+- SentenceTransformers (MiniLM-L6-v2 embeddings)
+- HuggingFace Transformers (Flan-T5-Small model)
+- pypdf (PDF text extraction)
+- Gradio (Frontend UI)
+- Python 3.10+
+
+
+## Project Structure
+
 pdf_ragbot/
 │
 ├── app/
-│   ├── main.py            # FastAPI routes (upload, chat, health)
-│   ├── rag.py             # Core RAG pipeline
-│   ├── utils.py           # PDF text extraction & chunking
-│   ├── vector_store.py    # FAISS index handling
-│   ├── llm.py             # HuggingFace model and prompting
+│ ├── main.py # FastAPI endpoints (upload, chat, health)
+│ ├── rag.py # RAG pipeline (retrieval + generation)
+│ ├── utils.py # PDF extraction and text chunking
+│ ├── vector_store.py # FAISS index operations
+│ ├── llm.py # Local LLM wrapper
 │
-├── gradio_app.py          # Gradio-based UI
+├── gradio_app.py # Optional Gradio UI
 ├── requirements.txt
 ├── README.md
-├── uploads/               # Uploaded PDFs (ignored in Git)
-├── models/                # FAISS index & metadata (ignored in Git)
+├── uploads/ # PDF upload directory
+├── models/ # FAISS index and metadata
 └── .gitignore
 
-Installation
-1. Clone the Repository
+## Installation
+
+### 1. Clone the Repository
 git clone https://github.com/Kritika-19/PDF-RAG-BOT.git
 cd PDF-RAG-BOT
 
-2️. Create & Activate Virtual Environment
+### 2. Create and Activate Virtual Environment
 python -m venv pvenv
-pvenv\Scripts\activate   # Windows
+pvenv\Scripts\activate    # Windows
 
-3️. Install Dependencies
+### 3. Install Dependencies
 pip install -r requirements.txt
 
-*Running the FastAPI Backend
-
-Start the backend server: uvicorn app.main:app --reload
-
+### Running the Backend (FastAPI)
+Start the API server:
+uvicorn app.main:app --reload
 API available at:
+Swagger UI: http://127.0.0.1:8000/docs
+Health Check: http://127.0.0.1:8000/health
 
-Swagger UI → http://127.0.0.1:8000/docs
-
-Health Check → http://127.0.0.1:8000/health
-
---Running the Gradio UI
-
-In another terminal: python gradio_app.py
-
+Running the Frontend (Gradio)
+python gradio_app.py
 Gradio will open at: http://127.0.0.1:7860
 
-* How the RAG Pipeline Works
--PDF Upload: PDF files are uploaded to FastAPI and saved locally.
--Text Extraction: pypdf extracts text from each page.
--Chunking: Text is split into overlapping chunks for better retrieval.
--Embedding: Chunks are converted into embeddings using -- all-MiniLM-L6-v2
--Vector Indexing: Embeddings are stored in a FAISS index for similarity search.
--Querying: User question → embedded → top-k chunks retrieved.
--LLM Response: Retrieved context is passed into Flan-T5-Small which generates the final answer.
+### RAG Workflow Overview
+PDFs are uploaded through FastAPI or Gradio.
+Text is extracted using pypdf.
+Text is chunked into manageable segments.
+Embeddings are created using MiniLM-L6-v2.
+Embeddings are stored in a FAISS index.
+User query is embedded and matched with top-k similar chunks.
+Retrieved context is passed to Flan-T5-Small for answer generation.
 
-*API Endpoints
-GET /health:Check if the API is running.
-POST /upload:Upload one or multiple PDF files.
-Request:multipart/form-data with files[]
-POST /chat:Ask a question.
+### API Endpoints
+GET /health
+Health check for the backend.
 
-Parameters: query: string
+POST /upload
+Uploads one or more PDF files.
+Content-Type: multipart/form-data
+Field name: files[]
 
-Response:
+POST /chat
+Accepts a query string and returns an answer along with retrieved sources.
 
-{
-  "answer": "...",
-  "sources": [...]
-}
-
-*Example Workflow
-
--Start FastAPI
--Open Gradio UI
--Upload your PDFs
--Ask questions like:
-  "What is the document about?"
-  "Summarize section 2"
-  "Who is the author?"
--Model retrieves relevant chunks and answers using RAG.
 
 Kritika
