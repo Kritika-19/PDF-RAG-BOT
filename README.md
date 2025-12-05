@@ -28,7 +28,7 @@ The system includes a FastAPI backend and an optional Gradio-based user interfac
 
 
 ## Project Structure
-
+'''
 pdf_ragbot/
 │
 ├── app/
@@ -44,7 +44,7 @@ pdf_ragbot/
 ├── uploads/ # PDF upload directory
 ├── models/ # FAISS index and metadata
 └── .gitignore
-
+'''
 ## Installation
 
 ### 1. Clone the Repository
