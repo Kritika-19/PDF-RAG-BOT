@@ -28,7 +28,7 @@ The system includes a FastAPI backend and an optional Gradio-based user interfac
 
 
 ## Project Structure
-'''
+``` 
 pdf_ragbot/
 │
 ├── app/
@@ -44,7 +44,7 @@ pdf_ragbot/
 ├── uploads/ # PDF upload directory
 ├── models/ # FAISS index and metadata
 └── .gitignore
-'''
+``` 
 ## Installation
 
 ### 1. Clone the Repository
@@ -61,8 +61,10 @@ pip install -r requirements.txt
 ### Running the Backend (FastAPI)
 Start the API server:
 uvicorn app.main:app --reload
+
 API available at:
 Swagger UI: http://127.0.0.1:8000/docs
+
 Health Check: http://127.0.0.1:8000/health
 
 Running the Frontend (Gradio)
