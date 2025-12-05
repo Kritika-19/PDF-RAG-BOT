@@ -68,9 +68,10 @@ Swagger UI: http://127.0.0.1:8000/docs
 Health Check: http://127.0.0.1:8000/health
 
 Running the Frontend (Gradio)
+```
 python gradio_app.py
 Gradio will open at: http://127.0.0.1:7860
-
+```
 ### RAG Workflow Overview
 PDFs are uploaded through FastAPI or Gradio.
 Text is extracted using pypdf.
@@ -79,7 +80,7 @@ Embeddings are created using MiniLM-L6-v2.
 Embeddings are stored in a FAISS index.
 User query is embedded and matched with top-k similar chunks.
 Retrieved context is passed to Flan-T5-Small for answer generation.
-
+'''
 ### API Endpoints
 GET /health
 Health check for the backend.
